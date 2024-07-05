@@ -33,13 +33,13 @@ steps:
       
 #       echo '##vso[task.setvariable variable=MD_APPLE_SDK_ROOT;]'/Applications/Xcode_$(XCodeVersion).app;sudo xcode-select --switch /Applications/Xcode_$(XCodeVersion).app/Contents/Developer
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'restore'
-    projects: '**/*BasicAppiumSample.sln'
-    feedsToUse: 'select'
-    vstsFeed: '1dbc2677-9915-4987-9686-bdbd5c7dd14d'
-    noCache: true
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: 'restore'
+#     projects: '**/*BasicAppiumSample.sln'
+#     feedsToUse: 'select'
+#     vstsFeed: '1dbc2677-9915-4987-9686-bdbd5c7dd14d'
+#     noCache: true
 - task: CmdLine@2
   inputs:
     script: 'dotnet build -t:Run -f net8.0-android'
