@@ -2,6 +2,7 @@
 
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
+using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Remote;
 
 namespace UITests;
@@ -27,12 +28,16 @@ public class AppiumSetup
 			PlatformName = "Android",
 			// This is the Android version, not API level
 			// This is ignored if you use the avd option belowf
-			PlatformVersion = "12",
+			// PlatformVersion = "12",
 			// The full path to the .apk file to test or the package name if the app is already installed on the device
-			App = "/Users/dungnb/DemoAppiumTest-Git/MauiApp/bin/Debug/net7.0-android/com.companyname.basicappiumsample.apk",
+			// App = "/Users/dungnb/DemoAppiumTest-Git/MauiApp/bin/Debug/net7.0-android/com.companyname.basicappiumsample.apk",
 
 		};
+		// androidOptions.AddAdditionalAppiumOption(MobileCapabilityType.NoReset, "true");
+		androidOptions.AddAdditionalAppiumOption(AndroidMobileCapabilityType.AppPackage, "com.companyname.basicappiumsample");
 
+		//Make sure to set [Register("com.companyname.basicappiumsample.MainActivity")] on the MainActivity of your android application
+		androidOptions.AddAdditionalAppiumOption(AndroidMobileCapabilityType.AppActivity, $"com.companyname.basicappiumsample.MainActivity");
 		// Specifying the avd option will boot the emulator for you
 		// make sure there is an emulator with the name below
 		// If not specified, make sure you have an emulator booted
@@ -40,6 +45,7 @@ public class AppiumSetup
 		// Setting allowInvisibleElements to true
 
 		// androidOptions.AddAdditionalAppiumOption("android:allowInvisibleElements", true);
+		// androidOptions.AddAdditionalAppiumOption("settings:allowInvisibleElements", true);
 		// Note there are many more options that you can use to influence the app under test according to your needs
 		driver = new AndroidDriver(androidOptions);
 	}
