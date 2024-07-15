@@ -114,3 +114,6 @@ This sample does automatically start and stops the Appium server for you as part
 If you want to start the Appium server manually, go into each `AppiumSetup.cs` file in each of the platform projects and comment out the lines that call on `AppiumServerHelper`, there are two, one to start the server and one to stop it.
 
 You will have to make sure the Appium server is started before running the tests and optionally configure the Appium drivers used in code to be able to reach your own server.
+fix error Session Identified by is unknown
+adb uninstall io.appium.uiautomator2.server
+adb uninstall io.appium.uiautomator2.server.test

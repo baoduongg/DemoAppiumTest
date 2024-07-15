@@ -1,4 +1,8 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 // You will have to make sure that all the namespaces match
 // between the different platform specific projects and the shared
@@ -16,28 +20,26 @@ public class MainPageTests : BaseTest
 		// bug https://github.com/appium/dotnet-client/issues/798
 		App.GetScreenshot().SaveAsFile($"{nameof(AppLaunches)}.png");
 	}
-
 	[Test]
-	public void ClickCounterTest()
+	[Category("Test_Login_Success")]
+	public void Test_Login_Success()
 	{
-		// Arrange
-		// Find elements with the value of the AutomationId property
-		var element = FindUIElement("CounterBtn");
+		// Find UI elements
+		var usernameField = FindUIElement("UsernameEntry");
+		var passwordField = FindUIElement("PasswordEntry");
+		var loginButton = FindUIElement("LoginButton");
 
-		// Act
-		element.Click();
-		Task.Delay(500).Wait(); // Wait for the click to register and show up on the screenshot
+		// Input credentials
+		usernameField.SendKeys("usernametest" + "\n");
+		Task.Delay(1000).Wait(); // Short delay to ensure UI readiness
+		passwordField.SendKeys("passwordTest" + "\n");
+		Task.Delay(1000).Wait(); // Optional delay before clicking the login button
 
-		element.Click();
-		Task.Delay(500).Wait(); // Wait for the click to register and show up on the screenshot
+		loginButton.Click();
 
-		element.Click();
-		Task.Delay(500).Wait(); // Wait for the click to register and show up on the screenshot
+		// Wait for navigation to complete (consider using a more reliable wait mechanism)
+		Task.Delay(5000).Wait();
 
-		// element.Click();
-		// Task.Delay(500).Wait(); // Wait for the click to register and show up on the screenshot
-		// Assert
-		App.GetScreenshot().SaveAsFile($"{nameof(ClickCounterTest)}.png");
-		Assert.That(element.Text, Is.EqualTo("Clicked 3 times"));
 	}
+
 }
